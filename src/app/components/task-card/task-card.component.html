@@ -1,12 +1,16 @@
 <div class="p-3 bg-[#FAFAFA] rounded-xl cursor-grab flex flex-col gap-3">
   <div class="flex gap-1">
-    <p class="font-bold">Minha nova tarefa</p>
-    <img src="images/icon-delete.svg" alt="Excluir tarefa" class="self-start cursor-pointer ml-auto" />
+    <p class="font-bold" [title]="task.name">{{ task.name.length < 14 ? task.name : (task.name | slice: 0 : 14) + "..." }}</p>
+    <img (click)="onDeleteTask()" src="images/icon-delete.svg" alt="Excluir tarefa" class="self-start cursor-pointer ml-auto" />
   </div>
-  <p class="font-light text-sm">ESsa é a minha tarefa para creiar uma aplicação angular...</p>
+  <p class="font-light text-sm" [title]="task.description">
+    {{ task.description.length < 20 ? task.description : (task.description | slice: 0 : 20) + "..." }}
+  </p>
   <div class="flex items-center gap-1">
     <img src="images/icon-comments.svg" alt="" />
-    <p class="font-semibold text-xs text-[#2A89EF] underline underline-offset-2 cursor-pointer">2 comentários</p>
-    <p class="font-semibold text-xs text-[#2A89EF] underline underline-offset-2 cursor-pointer ml-auto">Editar</p>
+    <p (click)="openTaskCommentsModal()" class="font-semibold text-xs text-[#2A89EF] underline underline-offset-2 cursor-pointer">
+      {{ task.comments.length }} comentários
+    </p>
+    <p (click)="openEditTaskModal()" class="font-semibold text-xs text-[#2A89EF] underline underline-offset-2 cursor-pointer ml-auto">Editar</p>
   </div>
 </div>
